@@ -1,5 +1,5 @@
 services:
-  stock-monitor:
+  snp500:
     build: .
     volumes:
       - ./reports:/app/reports
