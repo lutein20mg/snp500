@@ -1,8 +1,13 @@
 services:
   stock-monitor:
     build: .
-    ports:
-      - "8765:8765"
     volumes:
       - ./reports:/app/reports
     restart: unless-stopped
+    networks:
+      - ai-network
+
+networks:
+  ai-network:
+    external: true
+    name: docker_ai-network
