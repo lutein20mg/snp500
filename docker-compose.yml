@@ -1,0 +1,10 @@
+services:
+  stock-monitor:
+    build: .
+    ports:
+      - "8765:8765"
+    volumes:
+      - ./reports:/app/reports
+    env_file:
+      - .env
+    restart: unless-stopped

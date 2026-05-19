@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(cd /d D:\\\\Projects\\\\stock-monitor)",
+      "Bash(Get-ChildItem -Path . -Recurse)",
+      "Bash(Select-Object -Property FullName)",
+      "Bash(Format-Table -AutoSize)",
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "Bash(git --version)",
+      "Bash(winget --version)",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit *)"
+    ]
+  }
+}
