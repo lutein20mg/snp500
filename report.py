@@ -224,7 +224,7 @@ def _crisis_table():
 
 # ── HTML 조립 ──────────────────────────────────────────────────
 
-def build_html(data, ai_text=None):
+def build_html(data):
     vix   = data["vix"]
     fg    = data["fg"]
     sp    = data["sp500"]
@@ -293,12 +293,6 @@ def build_html(data, ai_text=None):
                 <div style="width:{pct:.0f}%;background:{c};border-radius:4px;height:8px"></div></div>
               <div style="width:60px;text-align:right;font-size:12px;color:#888">{s}/{mx}</div></div>"""
 
-    ai_block = ""
-    if ai_text:
-        ai_block = f"""<div class="sec" style="background:#f8f4ff;border:2px solid #9b59b6">
-          <h2 style="color:#6c3483">AI 종합 해석</h2>
-          <div style="line-height:1.8;white-space:pre-wrap">{ai_text}</div></div>"""
-
     dd_now = abs(sp["drawdown"]) if sp else 0
     vix_now = vix["current"] if vix else 0
     fg_now = fg["score"] if fg else 50
@@ -364,8 +358,6 @@ function rfData(){{
     70+ 강력매수 / 50-69 매수고려 / 30-49 관망 / 15-29 중립 / 0-14 고점근처</div>
 </div>
 
-{ai_block}
-
 <div class="sec">
   <h2>실시간 시장 지표</h2>
   <div class="cards">{cards}</div>
@@ -423,12 +415,12 @@ function rfData(){{
 </div></body></html>"""
 
 
-def save(data, ai_text=None, out_dir="reports"):
+def save(data, out_dir="reports"):
     os.makedirs(out_dir, exist_ok=True)
     ts = datetime.now()
     path = os.path.join(out_dir, f"report_{ts:%Y%m%d_%H%M}.html")
     latest = os.path.join(out_dir, "latest.html")
-    html = build_html(data, ai_text)
+    html = build_html(data)
     for p in (path, latest):
         with open(p, "w", encoding="utf-8") as f:
             f.write(html)
